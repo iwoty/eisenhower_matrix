@@ -2,7 +2,9 @@
 
 ## The story
 
-The Eisenhower Matrix is a great tool for time managing and improve your productivity. It is often used in IT projects teams to prioritize tasks.
+The Eisenhower Matrix is a great tool for time managing and improve your productivity. It is often used in IT projects teams to prioritize tasks. 
+
+Bob is a beginner Codecooler. He is a good self-learner, but he has a problem to focus on the only one thing in one moment. That's the reason that he sometimes feels lost in his job. Please help him to improve his efficiency and implement for him Eisenhower Matrix Application. He precised his expectations the user story.
 
 ## Tasks
 
@@ -12,15 +14,16 @@ The Eisenhower Matrix is a great tool for time managing and improve your product
 4. Not important & not urgent: Add some extra features.
 
 
-## User story
+## The user story
 
 1. As a user I would like to choose a status of shown TODO items:
+  
   - urgent & important items
   - not urgent & important items
   - urgent & not important items
   - not urgent & not important items
 
-  Urgent means that there's 3 days (72 hours) to deadline at least.
+    Urgent means that there's 3 days (72 hours) to deadline at least.
 
 2. As a user I would like to see a list TODO items sorted decreasing by deadline from chosen matrix's quarter with its details.
 
@@ -36,20 +39,54 @@ The Eisenhower Matrix is a great tool for time managing and improve your product
 
 8. As a user I would like to archive TODO items - remove all done items.
 
-9. A a user I would like to keep all my TODO items in a .csv files.
+9. As a user I would like to keep all my TODO items in a .csv files.
 
 10. As a user I would like to automatically archive all done tasks before save items and quit the application.
 
 11. As a user I would like to see a whole Eisenhower matrix (every quarter with its items).
 
-Extras:
+### Extras:
+
 12. As a user I would like to see colored (only unmarked) todo_items:
   - green: if the deadline is coming far than 3 days
   - orange: if deadline is coming in the next 3 days
   - red: if deadline is crossed
 
-13. As a user I would like to see a matrix formatted to table.
+13. As a user I would like to see a matrix formatted to the following table.
 
+```
+"
+    |            URGENT              |           NOT URGENT           |  
+  --|--------------------------------|--------------------------------|--
+    | 1. [ ] 9-6  go to the doctor   |                                |
+    | 2. [x] 11-6 submit assignment  |                                |
+  I |                                |                                |
+  M |                                |                                |
+  P |                                |                                |
+  O |                                |                                |
+  R |                                |                                |      
+  T |                                |                                |
+  A |                                |                                |
+  N |                                |                                |
+  T |                                |                                |
+    |                                |                                |
+    |                                |                                |
+  --|--------------------------------|--------------------------------|--                               
+  N | 1. [ ] 14-6 buy a ticket       | 1. [x] 30-5 House of Cards     |
+  O |                                |                                |
+  T |                                |                                |
+    |                                |                                |
+  I |                                |                                |
+  P |                                |                                |
+  O |                                |                                |
+  R |                                |                                |
+  T |                                |                                |
+  A |                                |                                |
+  N |                                |                                |
+  T |                                |                                |
+  --|--------------------------------|--------------------------------|--
+  "
+  ```
 
 
 ## Requirements
@@ -76,7 +113,8 @@ Extras:
 
 * Plan your task in Eisenhower matrix. First of all focus on the implement required class (and its instance methods). Then think about usefulness.
 
-* Please fill up specification in this file if you implement new functions. Use markdown syntaxes.
+* Please fill up specification in this file if you implemented more functions. Use markdown syntaxes.
+
 
 ## The specification
 
@@ -85,7 +123,7 @@ TODO
 
 ### `todo_item.py`
 
-This is the file containing an todo_item business logic.
+This is the file containing a todo_item logic.
 
 ### Class TodoItem
 
@@ -124,14 +162,12 @@ __Instance methods__
   Format of deadline is 'day-month'
 
   Expecting output for example done item:
-  ```
-  [x] 12-6 submit assignment
-  ```
+  
+  `[x] 12-6 submit assignment`
 
   Expecting output for example undone item:
-  ```
-  [ ] 28-6 submit assignment
-  ```
+  
+  `[ ] 28-6 submit assignment`
 
 ### `todo_quarter.py`
 
@@ -164,7 +200,7 @@ __Instance methods__
 
   Removes *TodoItem* object from *index* of list *todo_items*
 
-* `archive_todo_items(self)`
+* `archive_items(self)`
 
   Removes all *TodoItem* objects with a parameter *is_done* set to *True* from list *todo_items*.
 
@@ -177,15 +213,13 @@ __Instance methods__
 
   Returns a formatted list of *todo_items* sorted decreasing by *deadline*. There is an expecting output:
 
-  ```
-  1. [ ] 9-6  go to the doctor
-  2. [x] 11-6 submit assignment
-  ```
+  `1. [ ] 9-6  go to the doctor
+   2. [x] 11-6 submit assignment`
+  
   Hint: use instance method *__str__()* from class *TodoItem*
 
 
-### todo_matrix.py
-
+### `todo_matrix.py`
 ### Class TodoMatrix
 
 This is the file containing the logic of an Eisenhower todo_matrix.
@@ -196,12 +230,14 @@ __Attributes__
 
   - data: dictionary
   - description: contains *TodoQuarter* objects
+  
     key: string - status of todo_quarter, value: ToDoQuarter object
+        
         possible status of TODO quarter:
-        'IU' means that todo_quarter contains important todo_items & urgent
-        'IN' means that todo_quarter contains important todo_items & not urgent
-        'NU' means that todo_quarter contains not important todo_items & urgent
-        'NN' means that todo_quarter contains not important & not urgent todo_items
+        - 'IU' means that todo_quarter contains important todo_items & urgent
+        - 'IN' means that todo_quarter contains important todo_items & not urgent
+        - 'NU' means that todo_quarter contains not important todo_items & urgent
+        - 'NN' means that todo_quarter contains not important & not urgent todo_items
 
 
 __Instance methods__
@@ -222,14 +258,15 @@ __Instance methods__
 
 * `add_items_from_file(self, file_name)`
 
-  Reads data from *file_name.csv* file and append *TodoItem* objects to attributes *todo_items* in the properly *TodoQuarter* objects.
+  Reads data from *file_name.csv* file and append *TodoItem* objects to attributes *todo_items* in the properly *TodoQuarter*   objects.
   Raises *FileNotFoundError* if a file doesn't exist.
   Every item is written in a separate line the following format:
   
   `title|day-month|is_important`
   
   If *is_important* is equal to False then last element is en empty string. Otherwise the last element is an arbitrary string
-
+  If the last element of line is an empty string, *is_important* is equal to False - it means that the item should be assign     to a not important TODO quarter. Otherwise item should be assign to an important TODO quarter.
+  
 * `save_items_to_file(self, file_name)`
 
   Writes all details about TODO items to *file_name.csv* file
@@ -237,49 +274,13 @@ __Instance methods__
   
   `title|day-month|is_important`
   
-  If *TodoItem* object attribute *is_important* contains False then last element is en empty string. Otherwise last element is an arbitrary string.
+  If *is_important* contains False then the last element of line should be an empty string. Otherwise last element is an         arbitrary string.
 
 * `archive_items(self)`
 
-  Removes all *TodoItem* objects with a parameter *is_done* set to *True* from list *todo_items* in every element of dictionary *todo_quarters*
+  Removes all *TodoItem* objects with a parameter *is_done* set to *True* from list *todo_items* in every element of  dictionary *todo_quarters*
 
 * `__str__(self)`
 
   Returns a todo_quarters list (an Eisenhower todo_matrix) formatted to string.
-
-  Optional:
-  Output string is formatted to the following table:
-
-```
-"
-    |            URGENT              |           NOT URGENT           |  
-  --|--------------------------------|--------------------------------|--
-    | 1. [ ] 9-6  go to the doctor   |                                |
-    | 2. [x] 11-6 submit assignment  |                                |
-  I |                                |                                |
-  M |                                |                                |
-  P |                                |                                |
-  O |                                |                                |
-  R |                                |                                |      
-  T |                                |                                |
-  A |                                |                                |
-  N |                                |                                |
-  T |                                |                                |
-    |                                |                                |
-    |                                |                                |
-  --|--------------------------------|--------------------------------|--                               
-  N | 1. [ ] 14-6 buy a ticket       | 1. [x] 30-5 House of Cards     |
-  O |                                |                                |
-  T |                                |                                |
-    |                                |                                |
-  I |                                |                                |
-  P |                                |                                |
-  O |                                |                                |
-  R |                                |                                |
-  T |                                |                                |
-  A |                                |                                |
-  N |                                |                                |
-  T |                                |                                |
-  --|--------------------------------|--------------------------------|--
-  "
-  ```
+  
