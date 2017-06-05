@@ -1,4 +1,4 @@
-# Eisenhower ToDoMatrix App
+# The Eisenhower Matrix App
 
 ## The story
 
@@ -24,7 +24,7 @@ The Eisenhower Matrix is a great tool for time managing and improve your product
 
 2. As a user I would like to see a list TODO items sorted decreasing by deadline from chosen matrix's quarter with its details.
 
-3. As a user I would like to see a deadline formatted to *day_month*. I use matrix for the 2017 year.
+3. As a user I would like to see a deadline formatted to *day-month*. I use matrix for the 2017 year.
 
 4. As a user I would like to add an item with its deadline and priority, which is automatically assign to a properly quarter.
 
@@ -34,35 +34,48 @@ The Eisenhower Matrix is a great tool for time managing and improve your product
 
 7. As a user I would like to remove a chosen TODO item.
 
-8. As a user I would like to archive TODO items - remove all done items.         
+8. As a user I would like to archive TODO items - remove all done items.
 
 9. A a user I would like to keep all my TODO items in a .csv files.
 
-10. As a user I would like to see a whole Eisenhower matrix (every quarter with its items).
+10. As a user I would like to automatically archive all done tasks before save items and quit the application.
+
+11. As a user I would like to see a whole Eisenhower matrix (every quarter with its items).
 
 Extras:
-11. As a user I would like to see colored (only unmarked) todo_items:
+12. As a user I would like to see colored (only unmarked) todo_items:
   - green: if the deadline is coming far than 3 days
   - orange: if deadline is coming in the next 3 days
   - red: if deadline is crossed
 
-12. As a user I would like to see a matrix formatted to table.
+13. As a user I would like to see a matrix formatted to table.
 
 
 
 ## Requirements
 
 * Implement all modules described in a specification.
+
 * Implement the *main.py* module and fulfill its specification.
+
 * You are allowed to implement your own custom functions and modules. Remember about clean code.
+
 * Remember about comments and docstrings.
+
 * All tests must pass.
+
 * Please don't change a file *todo_items_read_test.csv*! It's important for passing tests.
+
 * Your program should fulfill cases described in the user story.
+
 * Use module *datetime* for time variables and operations -> https://docs.python.org/3/library/datetime.html
+
 * Program should be based on the Object Oriented Programming paradigm
+
 * Remember about proper constructors - not all attributes object are assign by a parameter!
+
 * Plan your task in Eisenhower matrix. First of all focus on the implement required class (and its instance methods). Then think about usefulness.
+
 * Please fill up specification in this file if you implement new functions. Use markdown syntaxes.
 
 ## The specification
@@ -92,18 +105,22 @@ __Attributes__
 
 __Instance methods__
 
-* ##### ` __init__(self, title, deadline) `
-  constructs an ToDoItem object
-  raises ValueError if type of any argument is incorrect
+* ##### ` __init__(self, title, deadline)`
+  
+  Constructs an ToDoItem object
+  Raises ValueError if type of any argument is incorrect
 
 * `mark(self)`
-  sets the object's * is_done * attribute to True
+  
+  Sets the object's * is_done * attribute to True
 
 * `unmark(self)`
-  sets the object's * is_done * attribute to False
+  
+  Sets the object's * is_done * attribute to False
 
 * `__str__(self)`
-  returns a formatted string with details about todo_item.
+
+  Returns a formatted string with details about todo_item.
   Format of deadline is 'day-month'
 
   Expecting output for example done item:
@@ -131,27 +148,34 @@ __Instance Attributes__
 __Instance methods__
 
 * ##### ` __init__(self) `
-  constructs a *ToDoQuarter* object
+
+  Constructs a *ToDoQuarter* object
 
 * `sort_items(self)`
-  sorts a *todo_items* list decreasing by *deadline* attribute
+
+  Sorts a *todo_items* list decreasing by *deadline* attribute
 
 * `add_item(self, title, deadline)`
-  append *TodoItem* object to `archive_todo_items(self)` *todo_items* sorted decreasing by *deadline*
-  raises *TypeError* if an argument *deadline* is not an instance of Datetime class
+
+  Append *TodoItem* object to *todo_items* sorted decreasing by *deadline*.
+  Raises *TypeError* if an argument *deadline* is not an instance of Datetime class.
 
 * `remove_item(self)`
-  removes *TodoItem* object from *index* of list *todo_items*
+
+  Removes *TodoItem* object from *index* of list *todo_items*
 
 * `archive_todo_items(self)`
-  removes all *TodoItem* objects with a parameter *is_done* set to *True* from list *todo_items*
+
+  Removes all *TodoItem* objects with a parameter *is_done* set to *True* from list *todo_items*.
 
 * `get_item(self, index)`
-  returns *TodoItem* object from *index* of list *todo_items*
-  raises *IndexError* if an argument *index*  is out of range list *todo_items*
+
+  Returns *TodoItem* object from *index* of list *todo_items*.
+  Raises *IndexError* if an argument *index*  is out of range list *todo_items*.
 
 * `__str__(self)`
-  returns a formatted list of *todo_items* sorted decreasing by *deadline*. There is an expecting output:
+
+  Returns a formatted list of *todo_items* sorted decreasing by *deadline*. There is an expecting output:
 
   ```
   1. [ ] 9-6  go to the doctor
@@ -168,7 +192,8 @@ This is the file containing the logic of an Eisenhower todo_matrix.
 
 __Attributes__
 
-* todo_quarters
+* `todo_quarters`
+
   - data: dictionary
   - description: contains *TodoQuarter* objects
     key: string - status of todo_quarter, value: ToDoQuarter object
@@ -178,46 +203,55 @@ __Attributes__
         'NU' means that todo_quarter contains not important todo_items & urgent
         'NN' means that todo_quarter contains not important & not urgent todo_items
 
+
 __Instance methods__
 
 * ##### `__init__(self) `
-  constructs a *TodoMatrix* object with all possible quarters
+
+  Constructs a *TodoMatrix* object with all possible quarters
 
 * `get_quarter(self, status)`
-  returns a *TodoQuarter* object from a dictionary *todo_quarters*
 
-* `add_item`(self, title, deadline, is_important=False)
-  append a *TodoQuarterItem* object to attribute *todo_items* in the properly *TodoQuarter* object  
-  raises *TypeError* if an argument *deadline* is not an instance of Datetime class
+  Returns a chosen *TodoQuarter* object from a dictionary *todo_quarters*.
+  Status should be one of the posiible statuses ('IU', 'IN', 'NU', 'NN').
+
+* `add_item(self, title, deadline, is_important=False)`
+
+  Append a *TodoQuarterItem* object to attribute *todo_items* in the properly *TodoQuarter* object.
+  Raises *TypeError* if an argument *deadline* is not an instance of Datetime class.
 
 * `add_items_from_file(self, file_name)`
-  reads data from *file_name.csv* file and append *TodoItem* objects to attributes *todo_items* in the properly *TodoQuarter* objects
-  raises *FileNotFoundError* if a file doesn't exist
 
-  every item is written in a separate line the following format:
-  ```
-  title|day-month|is_important
-  ```
-  If *TodoItem* object attribute *is_important* contains False then last element is en empty string. Otherwise last element is an arbitrary string
+  Reads data from *file_name.csv* file and append *TodoItem* objects to attributes *todo_items* in the properly *TodoQuarter* objects.
+  Raises *FileNotFoundError* if a file doesn't exist.
+  Every item is written in a separate line the following format:
+  
+  `title|day-month|is_important`
+  
+  If *is_important* is equal to False then last element is en empty string. Otherwise the last element is an arbitrary string
 
-* `save_items_to_file`(self, file_name)
-  writes all details about TODO items to *file_name.csv* file
-  every item is written in a separate line the following format:
-  ```
-  title|day-month|is_important
-  ```
-  If *TodoItem* object attribute *is_important* contains False then last element is en empty string. Otherwise last element is an arbitrary string
+* `save_items_to_file(self, file_name)`
+
+  Writes all details about TODO items to *file_name.csv* file
+  Every item is written in a separate line the following format:
+  
+  `title|day-month|is_important`
+  
+  If *TodoItem* object attribute *is_important* contains False then last element is en empty string. Otherwise last element is an arbitrary string.
 
 * `archive_items(self)`
-  removes all *TodoItem* objects with a parameter *is_done* set to *True* from list *todo_items* in every element of dictionary *todo_quarters*
+
+  Removes all *TodoItem* objects with a parameter *is_done* set to *True* from list *todo_items* in every element of dictionary *todo_quarters*
 
 * `__str__(self)`
-  returns a todo_quarters list (an Eisenhower todo_matrix) formatted to string
 
-  optional:
-  output string is formatted to the following table:
+  Returns a todo_quarters list (an Eisenhower todo_matrix) formatted to string.
 
-    ```
+  Optional:
+  Output string is formatted to the following table:
+
+```
+"
     |            URGENT              |           NOT URGENT           |  
   --|--------------------------------|--------------------------------|--
     | 1. [ ] 9-6  go to the doctor   |                                |
@@ -247,4 +281,5 @@ __Instance methods__
   N |                                |                                |
   T |                                |                                |
   --|--------------------------------|--------------------------------|--
+  "
   ```
