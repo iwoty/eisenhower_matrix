@@ -77,6 +77,7 @@ Bob is a beginner Codecooler. He is a good self-learner, but he has a problem to
   T |                                |                                |
     |                                |                                |
   I |                                |                                |
+  M |                                |                                |
   P |                                |                                |
   O |                                |                                |
   R |                                |                                |
