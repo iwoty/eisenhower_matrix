@@ -14,7 +14,7 @@ Bob is a beginner Codecooler. He is a good self-learner, but he has a problem to
 4. Not important & not urgent: Add some extra features.
 
 
-## The user story
+## User story
 
 1. As a user I would like to choose a status of shown TODO items:
   
