@@ -2,7 +2,7 @@
 
 ## The story
 
-The Eisenhower Matrix is a great tool for time management and improve your productivity. It is often used in IT projects teams to prioritize tasks. 
+The Eisenhower Matrix is a great tool for time management and improve your productivity. It is often used in IT projects teams for prioritize tasks. 
 
 Bob is a beginner Codecooler. He is a good self-learner, but he has a problem to focus on the only one thing in one moment. That's the reason that he sometimes feels lost in his job. Please help him to improve his efficiency and implement for him Eisenhower Matrix Application. He precised his expectations the user story.
 
