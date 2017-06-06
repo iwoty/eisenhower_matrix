@@ -124,7 +124,7 @@ TODO
 
 ### `todo_item.py`
 
-This is the file containing a todo_item logic.
+This is the file containing a TODO item logic.
 
 ### Class TodoItem
 
@@ -140,7 +140,7 @@ __Attributes__
 
 * `is_done`
   - data: bool
-  - description: contains True if TODO item is done, otherwise contains False.  Default value is False
+  - description: contains True if TODO item is done, otherwise contains False. Default value is False
 
 __Instance methods__
 
@@ -172,7 +172,7 @@ __Instance methods__
 
 ### `todo_quarter.py`
 
-This is the file containing a logic of an Eisenhower todo_quarter.
+This is the file containing a logic of the Eisenhower TODO quarter.
 
 ### Class TodoQuarter
 
@@ -190,29 +190,29 @@ __Instance methods__
 
 * `sort_items(self)`
 
-  Sorts a *todo_items* list decreasing by *deadline* attribute
+  Sorts a *todo_items* list decreasing by attribute *deadline*.
 
 * `add_item(self, title, deadline)`
 
-  Append *TodoItem* object to *todo_items* sorted decreasing by *deadline*.
-  Raises *TypeError* if an argument *deadline* is not an instance of Datetime class.
+  Append *TodoItem* object to attribute *todo_items* sorted decreasing by *deadline*.
+  Raises *TypeError* if an argument *deadline* is not an instance of *Datetime* class.
 
 * `remove_item(self)`
 
-  Removes *TodoItem* object from *index* of list *todo_items*
+  Removes *TodoItem* object from *index* of attribute *todo_items*.
 
 * `archive_items(self)`
 
-  Removes all *TodoItem* objects with a parameter *is_done* set to *True* from list *todo_items*.
+  Removes all *TodoItem* objects with a parameter *is_done* set to *True* from attribute *todo_items*.
 
 * `get_item(self, index)`
 
-  Returns *TodoItem* object from *index* of list *todo_items*.
-  Raises *IndexError* if an argument *index*  is out of range list *todo_items*.
+  Returns *TodoItem* object from *index* of attribute *todo_items*.
+  Raises *IndexError* if an argument *index*  is out of range attribute *todo_items*.
 
 * `__str__(self)`
 
-  Returns a formatted list of *todo_items* sorted decreasing by *deadline*. There is an expecting output:
+  Returns a formatted string of *todo_items* sorted decreasing by *deadline*. There is an expecting output:
 
   `1. [ ] 9-6  go to the doctor
    2. [x] 11-6 submit assignment`
@@ -223,7 +223,7 @@ __Instance methods__
 ### `todo_matrix.py`
 ### Class TodoMatrix
 
-This is the file containing the logic of an Eisenhower todo_matrix.
+This is the file containing the logic of the Eisenhower TODO matrix.
 
 __Attributes__
 
@@ -232,7 +232,7 @@ __Attributes__
   - data: dictionary
   - description: contains *TodoQuarter* objects
   
-    key: string - status of todo_quarter, value: ToDoQuarter object
+    key: string - status of todo_quarter, value: *TodoQuarter* object
         
         possible status of TODO quarter:
         - 'IU' means that todo_quarter contains important todo_items & urgent
@@ -245,23 +245,23 @@ __Instance methods__
 
 * ##### `__init__(self) `
 
-  Constructs a *TodoMatrix* object with all possible quarters
+  Constructs a *TodoMatrix* object with all possible quarters.
 
 * `get_quarter(self, status)`
 
-  Returns a chosen *TodoQuarter* object from a dictionary *todo_quarters*.
-  Status should be one of the posiible statuses ('IU', 'IN', 'NU', 'NN').
+  Returns a chosen *TodoQuarter* object from the attribute *todo_quarters*.
+  Status should be one of the possible statuses ('IU', 'IN', 'NU', 'NN').
 
 * `add_item(self, title, deadline, is_important=False)`
 
   Append a *TodoQuarterItem* object to attribute *todo_items* in the properly *TodoQuarter* object.
-  Raises *TypeError* if an argument *deadline* is not an instance of Datetime class.
+  Raises *TypeError* if an argument *deadline* is not an instance of class *Datetime*.
 
 * `add_items_from_file(self, file_name)`
 
   Reads data from *file_name.csv* file and append *TodoItem* objects to attributes *todo_items* in the properly *TodoQuarter*   objects.
   Raises *FileNotFoundError* if a file doesn't exist.
-  Every item is written in a separate line the following format:
+  Every item is written to a separate line in the following format:
   
   `title|day-month|is_important`
   
@@ -271,7 +271,7 @@ __Instance methods__
 * `save_items_to_file(self, file_name)`
 
   Writes all details about TODO items to *file_name.csv* file
-  Every item is written in a separate line the following format:
+  Every item is written to a separate line in the following format:
   
   `title|day-month|is_important`
   
@@ -279,9 +279,9 @@ __Instance methods__
 
 * `archive_items(self)`
 
-  Removes all *TodoItem* objects with a parameter *is_done* set to *True* from list *todo_items* in every element of  dictionary *todo_quarters*
+  Removes all *TodoItem* objects with a parameter *is_done* set to *True* from list *todo_items* in every element of the attribute *todo_quarters*
 
 * `__str__(self)`
 
-  Returns a todo_quarters list (an Eisenhower todo_matrix) formatted to string.
+  Returns all elements of attribute *todo_quarters* formatted to string.
   
