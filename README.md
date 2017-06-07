@@ -55,7 +55,6 @@ Bob is a beginner Codecooler. He is a good self-learner, but he has a problem to
 13. As a user I would like to see a matrix formatted to the following table.
 
 ```
-"
     |            URGENT              |           NOT URGENT           |  
   --|--------------------------------|--------------------------------|--
     | 1. [ ] 9-6  go to the doctor   |                                |
@@ -86,7 +85,6 @@ Bob is a beginner Codecooler. He is a good self-learner, but he has a problem to
   N |                                |                                |
   T |                                |                                |
   --|--------------------------------|--------------------------------|--
-  "
   ```
 
 
@@ -214,8 +212,10 @@ __Instance methods__
 
   Returns a formatted string of *todo_items* sorted decreasing by *deadline*. There is an expecting output:
 
-  `1. [ ] 9-6  go to the doctor
-   2. [x] 11-6 submit assignment`
+  ```
+  1. [ ] 9-6  go to the doctor
+  2. [x] 11-6 submit assignment
+  ```
   
   Hint: use instance method *__str__()* from class *TodoItem*
 
