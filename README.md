@@ -197,7 +197,7 @@ __Instance methods__
   Append *TodoItem* object to attribute *todo_items* sorted decreasing by *deadline*.
   Raises *TypeError* if an argument *deadline* is not an instance of *Datetime* class.
 
-* `remove_item(self)`
+* `remove_item(self, index)`
 
   Removes *TodoItem* object from *index* of attribute *todo_items*.
 
