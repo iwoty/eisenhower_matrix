@@ -1,7 +1,5 @@
 
 from datetime import datetime
-from todo_quarter import TodoQuarter
-from todo_matrix import TodoMatrix
 
 
 class TodoItem:
@@ -10,6 +8,18 @@ class TodoItem:
         '''
         Constructs an ToDoItem object.
         Raises ValueError if type of any argument is incorrect.
+
+        * `title`
+          - data: string
+          - description: title of todo_item
+
+        * `deadline`
+          - data: Datetime object
+          - description: deadline of todo_item, year is always set to *2017*
+
+        * `is_done`
+          - data: bool
+          - description: contains True if TODO item is done, otherwise contains False. Default value is False
         '''
         self.title = title
         self.deadline = deadline
@@ -45,8 +55,8 @@ class TodoItem:
         `[ ] 28-6 submit assignment`
         '''
         if self.is_done is True:
-            is_done_mark = 'x'
+            is_done_mark = '[x] '
         else:
-            is_done_mark = ' '
+            is_done_mark = '[ ] '
 
-        return '[' + is_done_mark + '] ' + self.deadline + ' ' + self.title
+        return is_done_mark + str(self.deadline.day) + '-' + str(self.deadline.month) + ' ' + str(self.title)

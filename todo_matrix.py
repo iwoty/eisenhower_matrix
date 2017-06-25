@@ -1,5 +1,7 @@
 
 from datetime import datetime
+from todo_item import TodoItem
+from todo_quarter import TodoQuarter
 
 
 class TodoMatrix:
@@ -7,8 +9,18 @@ class TodoMatrix:
     def __init__(self):
         '''
         Constructs a *TodoMatrix* object with all possible quarters.
+        * `todo_quarters`
+          - data: dictionary
+          - description: contains *TodoQuarter* objects
+          key: string - status of todo_quarter, value: *TodoQuarter* object
+
+        possible status of TODO quarter:
+        - 'IU' means that todo_quarter contains important todo_items & urgent
+        - 'IN' means that todo_quarter contains important todo_items & not urgent
+        - 'NU' means that todo_quarter contains not important todo_items & urgent
+        - 'NN' means that todo_quarter contains not important & not urgent todo_items
         '''
-        pass
+        self.todo_quarters = {}
 
     def get_quarter(self, status):
         '''
@@ -22,7 +34,10 @@ class TodoMatrix:
         Append a *TodoQuarterItem* object to attribute *todo_items* in the properly *TodoQuarter* object.
         Raises *TypeError* if an argument *deadline* is not an instance of class *Datetime*.
         '''
-        pass
+        self.todo_quarters.append(TodoItem(title, deadline))
+
+        if type(deadline) is not datetime:
+            raise TypeError('Deadline is not an instance of *Datetime* class.')
 
     def add_items_from_file(self, file_name):
         '''
@@ -38,16 +53,14 @@ class TodoMatrix:
         If the last element of line is an empty string, *is_important* is equal to False - it means that the item
         should be assign to a not important TODO quarter. Otherwise item should be assign to an important TODO quarter.
         '''
+        file_name += '.csv'
         try:
             with open(file_name, "r") as file:
                 lines = file.readlines()
-            table = [element.replace("\n", "").split("|") for element in lines]
-            return table
+            table = [element.replace("\n", "") for element in lines]
 
         except FileNotFoundError:
             raise FileNotFoundError('File doesn\'t exist')
-
-        pass
 
     def save_items_to_file(self, file_name):
         '''
@@ -59,7 +72,11 @@ class TodoMatrix:
         If *is_important* contains False then the last element of line should be an empty string. Otherwise last element
         is an arbitrary string.
         '''
-        pass
+        file_name += '.csv'
+        with open(file_name, "w") as file:
+            for record in table:
+                row = record
+                file.write(row + "\n")
 
     def archive_items(self):
         '''
