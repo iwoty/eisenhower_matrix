@@ -63,7 +63,7 @@ Bob is a beginner Codecooler. He is a good self-learner, but he has a problem to
   M |                                |                                |
   P |                                |                                |
   O |                                |                                |
-  R |                                |                                |      
+  R |              IU                |               IN               |      
   T |                                |                                |
   A |                                |                                |
   N |                                |                                |
@@ -77,7 +77,7 @@ Bob is a beginner Codecooler. He is a good self-learner, but he has a problem to
     |                                |                                |
   I |                                |                                |
   M |                                |                                |
-  P |                                |                                |
+  P |             NU                 |             NN                 |
   O |                                |                                |
   R |                                |                                |
   T |                                |                                |

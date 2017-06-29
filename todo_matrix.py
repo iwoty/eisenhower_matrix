@@ -128,9 +128,30 @@ class TodoMatrix:
     def __str__(self):
         '''
         Returns all elements of attribute *todo_quarters* formatted to string.
+        str.center(width[, fillchar])
         '''
-        view_matrix = []
-        for key in self.todo_quarters:
-            view_matrix.append(key + '\n')
-            view_matrix.append(self.todo_quarters[key].__str__())
+        CELL_WIDTH = 40
+        TABLE_WIDTH = 2*CELL_WIDTH + 9
+        line = '-'*TABLE_WIDTH + '\n'
+
+        view_matrix = [' '*4 + '|' +
+                       'URGENT'.center(CELL_WIDTH) + '|' +
+                       'NOT URGENT'.center(CELL_WIDTH) + '|' + ' '*2 + '\n']
+        view_matrix.append(line)
+        # ljust(width[, fillchar])
+        # for i in range(16):
+        #     view_matrix.append(dict)
+        view_matrix.append('IU' + '\n')
+        view_matrix.append(self.todo_quarters['IU'].__str__())
+
+        view_matrix.append('IN' + '\n')
+        view_matrix.append(self.todo_quarters['IN'].__str__())
+
+        view_matrix.append('NU' + '\n')
+        view_matrix.append(self.todo_quarters['NU'].__str__())
+
+        view_matrix.append('NN' + '\n')
+        view_matrix.append(self.todo_quarters['NN'].__str__())
+
+        view_matrix.append(line)
         return ''.join(view_matrix)
