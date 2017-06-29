@@ -1,7 +1,9 @@
 
 from datetime import datetime
+from datetime import timedelta
 from todo_item import TodoItem
 from todo_quarter import TodoQuarter
+import csv
 
 
 class TodoMatrix:
@@ -20,21 +22,38 @@ class TodoMatrix:
         - 'NU' means that todo_quarter contains not important todo_items & urgent
         - 'NN' means that todo_quarter contains not important & not urgent todo_items
         '''
-        self.todo_quarters = {}
+        self.todo_quarters = {'IU': TodoQuarter(),
+                              'IN': TodoQuarter(),
+                              'NU': TodoQuarter(),
+                              'NN': TodoQuarter()}
 
     def get_quarter(self, status):
         '''
         Returns a chosen *TodoQuarter* object from the attribute *todo_quarters*.
         Status should be one of the possible statuses ('IU', 'IN', 'NU', 'NN').
         '''
-        pass
+        return(todo_quarters[status])
 
     def add_item(self, title, deadline, is_important=False):
         '''
         Append a *TodoQuarterItem* object to attribute *todo_items* in the properly *TodoQuarter* object.
         Raises *TypeError* if an argument *deadline* is not an instance of class *Datetime*.
         '''
-        self.todo_quarters.append(TodoItem(title, deadline))
+        if deadline - datetime.now() < timedelta(days=3):
+            is_urgent = True
+        else:
+            is_urgent = False
+
+        if is_important is True and is_urgent is True:
+            status = 'IU'
+        elif is_important is True and is_urgent is False:
+            status = 'IN'
+        elif is_important is False and is_urgent is True:
+            status = 'NU'
+        elif is_important is False and is_urgent is False:
+            status = 'NN'
+
+        self.todo_quarters[status].add_item(title, deadline)
 
         if type(deadline) is not datetime:
             raise TypeError('Deadline is not an instance of *Datetime* class.')
@@ -53,11 +72,23 @@ class TodoMatrix:
         If the last element of line is an empty string, *is_important* is equal to False - it means that the item
         should be assign to a not important TODO quarter. Otherwise item should be assign to an important TODO quarter.
         '''
-        file_name += '.csv'
         try:
-            with open(file_name, "r") as file:
-                lines = file.readlines()
-            table = [element.replace("\n", "") for element in lines]
+            with open(file_name, 'r') as f:
+                lines = f.readlines()
+            table = [element.replace('\n', '').split('|') for element in lines]
+
+            for item in table:
+                item[1] = item[1].split('-')  # split deadline from 'DD-MM' to day and month seperately
+                month = int(item[1][1])
+                day = int(item[1][0])
+                year = datetime.now().year
+
+                if item[2] == 'important':
+                    is_important = True
+                else:
+                    is_important = False
+
+                self.add_item(item[0], datetime(year, month, day), is_important)
 
         except FileNotFoundError:
             raise FileNotFoundError('File doesn\'t exist')
@@ -72,21 +103,34 @@ class TodoMatrix:
         If *is_important* contains False then the last element of line should be an empty string. Otherwise last element
         is an arbitrary string.
         '''
-        file_name += '.csv'
         with open(file_name, "w") as file:
-            for record in table:
-                row = record
-                file.write(row + "\n")
+            for key in self.todo_quarters:
+                for element in self.todo_quarters[key].todo_items:
+                    row = []
+                    row.append(element.title)
+                    row.append(str(element.deadline.day) + '-' + str(element.deadline.month))
+
+                    if key == 'IU' or key == 'IN':
+                        row.append('important')
+                    else:
+                        row.append('')
+
+                    file.write('|'.join(row) + '\n')
 
     def archive_items(self):
         '''
         Removes all *TodoItem* objects with a parameter *is_done* set to *True* from list *todo_items* in every element
         of the attribute *todo_quarters*
         '''
-        pass
+        for obj in self.todo_quarters.values():
+            obj.archive_items()
 
     def __str__(self):
         '''
         Returns all elements of attribute *todo_quarters* formatted to string.
         '''
-        pass
+        view_matrix = []
+        for key in self.todo_quarters:
+            view_matrix.append(key + '\n')
+            view_matrix.append(self.todo_quarters[key].__str__())
+        return ''.join(view_matrix)

@@ -1,3 +1,11 @@
-import random
+import datetime
 
-miejsca = ['Salwator', 'Tyniec', 'Zakrzowek']
+chujek = '25-6'
+
+print(chujek)
+
+chujek = chujek.split('-')
+
+print(chujek)
+
+print(datetime.datetime.now().year)

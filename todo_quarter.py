@@ -30,7 +30,7 @@ class TodoQuarter:
         if type(deadline) is not datetime:
             raise TypeError('Deadline is not an instance of *Datetime* class.')
 
-        self.sort_items()   # for tests passing ;)
+        self.sort_items()
 
     def remove_item(self, index):
         '''
